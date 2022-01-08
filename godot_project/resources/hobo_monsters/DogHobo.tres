@@ -9,4 +9,5 @@ name = "Dog Hobo"
 health_points = 10
 attack_damage = 1
 attack_speed = 1
+currency_on_death = 1
 texture = ExtResource( 2 )

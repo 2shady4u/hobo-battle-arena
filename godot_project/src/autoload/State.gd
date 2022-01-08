@@ -36,6 +36,7 @@ func _on_timer_timeout() -> void:
 
 func save_game_to_file():
 	print("Saving game to file")
+	saved_game.unix_time = OS.get_unix_time()
 
 	ResourceSaver.save(SAVE_PATH, saved_game)
 	ResourceSaver.save("res://saved_game_debug.tres", saved_game)
