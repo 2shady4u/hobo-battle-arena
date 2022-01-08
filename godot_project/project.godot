@@ -24,16 +24,28 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/autoload/state/HoboResource.gd"
 }, {
+"base": "Control",
+"class": "MutationBox",
+"language": "GDScript",
+"path": "res://src/game/StatsUI/Mutation.gd"
+}, {
 "base": "HoboResource",
 "class": "SavedGame",
 "language": "GDScript",
 "path": "res://src/autoload/state/SavedGame.gd"
+}, {
+"base": "Control",
+"class": "StatBox",
+"language": "GDScript",
+"path": "res://src/game/StatsUI/Stat.gd"
 } ]
 _global_script_class_icons={
 "GameTab": "",
 "HoboMonster": "",
 "HoboResource": "",
-"SavedGame": ""
+"MutationBox": "",
+"SavedGame": "",
+"StatBox": ""
 }
 
 [application]
