@@ -8,12 +8,36 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Resource",
+"class": "HoboResource",
+"language": "GDScript",
+"path": "res://src/autoload/state/HoboResource.gd"
+}, {
+"base": "HoboResource",
+"class": "SavedGame",
+"language": "GDScript",
+"path": "res://src/autoload/state/SavedGame.gd"
+} ]
+_global_script_class_icons={
+"HoboResource": "",
+"SavedGame": ""
+}
+
 [application]
 
 config/name="Hobo Battle Arena"
 config/description="Find against other hobos in this post-apocalyptic battle arena and become the alpha hobo!"
 run/main_scene="res://src/Game.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+State="*res://src/autoload/State.tscn"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
 
 [physics]
 

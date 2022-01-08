@@ -13,3 +13,6 @@ data_*/
 
 # Build files
 build/*
+
+# Debugging files
+godot_project/saved_game_debug.tres
