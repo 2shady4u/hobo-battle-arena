@@ -15,17 +15,17 @@ __meta__ = {
 }
 
 [node name="Stat" type="Label" parent="."]
-margin_right = 60.0
+margin_right = 50.0
 margin_bottom = 16.0
-rect_min_size = Vector2( 60, 0 )
+rect_min_size = Vector2( 50, 0 )
 text = "STR"
 valign = 1
 
 [node name="Value" type="Label" parent="."]
-margin_left = 64.0
-margin_right = 144.0
+margin_left = 54.0
+margin_right = 104.0
 margin_bottom = 16.0
-rect_min_size = Vector2( 80, 0 )
+rect_min_size = Vector2( 50, 0 )
 text = "50"
 align = 2
 valign = 1

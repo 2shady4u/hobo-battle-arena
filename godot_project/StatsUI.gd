@@ -13,18 +13,56 @@ onready var mutation_box = $MutationPanel/VBoxContainer
 
 var mutations = [
 	{
-		"name": "Gangreen armz"
+		"name": "arms",
+		"title": "Gangreen Armz",
+		"price": 15,
+		"rate": 1.8,
+		"stats": {
+			"atk": 2,
+			"def": 1
+		}
+	},{
+		"name": "legs",
+		"title": "Gangreen Legz",
+		"price": 100,
+		"rate": 1.9,
+		"stats": {
+			"hp": 20,
+			"spd": 2,
+		}
+	},{
+		"name": "head",
+		"title": "Gangreen Headz",
+		"price": 600,
+		"stats": {
+			"hp": 15,
+			"atk": 2,
+			"spd": 2,
+		}
+	},{
+		"name": "butt",
+		"title": "Gangreen Buttz",
+		"price": 3000,
+		"rate": 2.25,
+		"stats": {
+			"def": 20,
+		}
+	},{
+		"name": "pp",
+		"title": "Big PP",
+		"price": 1000000,
+		"rate": 2.4,
+		"stats": {
+			"def": 10,
+		}
 	}
 ]
 
-var stats = [
-	"hp", "atk", "def", "regen"
-]
-
-
+var stats = ["hp", "atk", "def", "spd", "regen", "abs"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
 	for stat in stats:
 		var stat_instance: StatBox = stat_scene.instance()
 		stats_box.add_child(stat_instance)
@@ -35,8 +73,25 @@ func _ready():
 		mutation_box.add_child(mutation_instance)
 		mutation_instance.set_data(mutation)
 
+	$Currency.text = get_formatted_money(State.saved_game.get_player_currency())
 
+func _on_currency_changed(currency):
+	$Currency.text = get_formatted_money(currency)
+
+
+func _process(delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		State.saved_game.increase_currency(50)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+func get_formatted_money(money: int):
+	if money > 1_000_000_000:
+		return "%3.2f" % (money * 1.0 / 1_000_000_000) + "BS"
+	if money > 1_000_000:
+		return "%3.2f" % (money * 1.0 / 1_000_000) + "MS"
+	if money > 1_000:
+		return "%3.2f" % (money * 1.0 / 1_000) + "KS"
+	return "%3d" % money + "S"
