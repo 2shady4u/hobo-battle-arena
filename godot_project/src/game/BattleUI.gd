@@ -1,4 +1,4 @@
-extends Control
+extends GameTab
 
 func _ready():
 	pass
