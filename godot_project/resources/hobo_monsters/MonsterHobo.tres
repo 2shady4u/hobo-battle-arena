@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://textures/monsterhobo.png" type="Texture" id=1]
+[ext_resource path="res://src/resources/HoboMonster.gd" type="Script" id=2]
+
+[resource]
+script = ExtResource( 2 )
+name = "Monster Hobo"
+health_points = 40
+attack_damage = 1
+attack_speed = 1
+currency_on_death = 1
+texture = ExtResource( 1 )

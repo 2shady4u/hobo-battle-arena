@@ -2,7 +2,6 @@ extends GameTab
 
 const PLAYER_NAME := "{0} Hobo (that's you!)"
 const HEALTH_BAR := "{0}/{1}"
-const CURRENCY_LABEL := "Used syringes: {0}"
 
 onready var _player_name_label := $MarginContainer/HB/PlayerVBox/NameLabel
 onready var _player_health_label := $MarginContainer/HB/PlayerVBox/HealthLabel
@@ -39,8 +38,6 @@ func _ready() -> void:
 	_respawn_timer.connect("timeout", self, "_on_respawn_timer_timeout")
 
 	saved_game = State.saved_game
-	saved_game.connect_node_to_setting("currency", self, "_on_currency_changed")
-	_on_currency_changed(saved_game.currency)
 
 	_spawn_player()
 	_spawn_monster()
@@ -63,9 +60,6 @@ func _on_monster_cooldown_timeout() -> void:
 
 func _on_respawn_timer_timeout() -> void:
 	_spawn_monster()
-
-func _on_currency_changed(currency : int) -> void:
-	_currency_label.text = CURRENCY_LABEL.format([currency])
 
 func _on_player_max_health_changed(player_max_health : int) -> void:
 	update_player_health_label()
