@@ -27,6 +27,7 @@ jobs:
           rsync -Rr . ./$EXPORT_NAME
           mkdir -v -p build/web
           cd $EXPORT_NAME
+          cd godot_project
           godot -v --export "HTML5" ../build/web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
