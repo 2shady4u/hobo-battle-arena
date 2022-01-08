@@ -1,5 +1,26 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/game/BattleUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Game.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Game" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
+tabs_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BattleUI" parent="TabContainer" instance=ExtResource( 1 )]
