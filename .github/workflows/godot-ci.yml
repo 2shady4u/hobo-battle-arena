@@ -40,5 +40,5 @@ jobs:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: web
           ITCH_GAME: hobo-battle-arena
-          ITCH_USER: 2shady4u
+          ITCH_USER: all-in-development
           PACKAGE: build/web
