@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/doghobo.png-ca250bd4c22099f0d7d3c71fe4192ad8.stex"
+path="res://.import/doghobo.png-9c95dfbb513b4c6bde04459208433507.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/doghobo.png"
-dest_files=[ "res://.import/doghobo.png-ca250bd4c22099f0d7d3c71fe4192ad8.stex" ]
+source_file="res://textures/doghobo.png"
+dest_files=[ "res://.import/doghobo.png-9c95dfbb513b4c6bde04459208433507.stex" ]
 
 [params]
 
