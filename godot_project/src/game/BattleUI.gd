@@ -6,7 +6,8 @@ const HOBO_MONSTERS := [
 	preload("res://resources/hobo_monsters/DogHobo.tres"),
 	preload("res://resources/hobo_monsters/LoveHobo.tres"),
 	preload("res://resources/hobo_monsters/MonsterHobo.tres"),
-	preload("res://resources/hobo_monsters/AmogusHobo.tres")
+	preload("res://resources/hobo_monsters/AmogusHobo.tres"),
+	preload("res://resources/hobo_monsters/IceCreamHobo.tres"),
 ]
 
 onready var _player_name_label := $MarginContainer/HB/PlayerVBox/NameLabel
