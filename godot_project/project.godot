@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "HoboResource",
+"class": "BattleFloor",
+"language": "GDScript",
+"path": "res://src/resources/BattleFloor.gd"
+}, {
 "base": "Control",
 "class": "GameTab",
 "language": "GDScript",
@@ -40,6 +45,7 @@ _global_script_classes=[ {
 "path": "res://src/game/stats_ui/Stat.gd"
 } ]
 _global_script_class_icons={
+"BattleFloor": "",
 "GameTab": "",
 "HoboMonster": "",
 "HoboResource": "",
