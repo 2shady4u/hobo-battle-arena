@@ -9,4 +9,5 @@ enum TYPE {
 
 export(TYPE) var type := TYPE.BATTLE
 
+# warning-ignore:unused_signal
 signal tab_change_requested

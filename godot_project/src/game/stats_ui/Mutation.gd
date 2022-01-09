@@ -1,11 +1,11 @@
-extends Control
+extends HBoxContainer
 class_name MutationBox
 
-onready var name_label: Label = $Name
-onready var price: Label = $Price
-onready var buy_button: Button = $BuyButton
+onready var name_label := $Name
+onready var price := $Price
+onready var buy_button := $BuyButton
 
-var actual_price = 0
+var actual_price := 0
 
 var mutation_data = null
 
@@ -13,7 +13,6 @@ func _ready():
 	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
 	State.saved_game.connect("upgrades_changed", self, "_on_upgrades_changed")
 	buy_button.connect("pressed", self, "_on_buy_button_pressed")
-
 
 func _on_upgrades_changed(new_upgrades_data):
 	if mutation_data.name in new_upgrades_data:
@@ -51,8 +50,7 @@ func _on_currency_changed(new_currency):
 
 func _on_buy_button_pressed():
 	State.saved_game.buy_mutation(mutation_data)
-	State.saved_game.pay_currency(actual_price)
-
+	State.saved_game.currency = max(State.saved_game.currency - actual_price, 0)
 
 func get_formatted_price():
 	if actual_price > 1_000_000_000:

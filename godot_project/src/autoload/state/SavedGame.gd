@@ -6,7 +6,7 @@ func _init():
 	add_property("currency", 500)
 	add_property("unix_time", OS.get_unix_time())
 	add_property("upgrades", {}) # contains bought mutations and completed trainings
-	add_property("training", null)
+	add_property("training", {})
 	add_property("coach", 0)
 
 func get_player_max_health() -> int:
@@ -20,12 +20,6 @@ func get_player_attack_damage() -> int:
 func get_player_attack_speed() -> int:
 	# TODO: Add some crazy algorithm that calculates the player's attack speed
 	return 1
-
-func get_player_upgrades() -> Dictionary:
-	return self.upgrades
-
-func get_player_training():
-	return self.training
 
 func get_stats() -> Dictionary:
 	var stats = {
@@ -82,8 +76,8 @@ func upgrade_coach():
 	self.coach = self.coach + 1
 
 func finish_training():
-	var training = _get("training")
-	if training:
+	var training : Dictionary = _get("training")
+	if not training.empty():
 		var upgrade_name = training.type + "_training"
 
 		var upgrades = _get("upgrades")
@@ -99,4 +93,4 @@ func finish_training():
 			}
 
 		self.upgrades = upgrades
-		self.training = null
+		self.training.clear()

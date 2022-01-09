@@ -45,16 +45,16 @@ func get_duration():
 		return 15.0
 
 func _on_button_pressed():
-	State.saved_game.set("training", {
+	State.saved_game.training = {
 		"type": training,
 		"start": OS.get_unix_time(),
 		"duration": get_duration()
-	})
+	}
 
 func _process(_delta : float):
-	var training_in_progress = State.saved_game.get("training")
+	var training_in_progress : Dictionary = State.saved_game.training
 
-	if training_in_progress:
+	if not training_in_progress.empty():
 		if training_in_progress.type == training:
 			var now = OS.get_unix_time()
 			if now > training_in_progress.start + training_in_progress.duration:

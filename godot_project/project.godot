@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/autoload/state/HoboResource.gd"
 }, {
-"base": "Control",
+"base": "HBoxContainer",
 "class": "MutationBox",
 "language": "GDScript",
 "path": "res://src/game/stats_ui/Mutation.gd"
@@ -34,7 +34,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/autoload/state/SavedGame.gd"
 }, {
-"base": "Control",
+"base": "HBoxContainer",
 "class": "StatBox",
 "language": "GDScript",
 "path": "res://src/game/stats_ui/Stat.gd"

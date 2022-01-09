@@ -1,7 +1,7 @@
 extends GameTab
 
-onready var training = $Panel/Training
-onready var not_training = $Panel/NoTraining
+onready var _training_panel = $Panel/Training
+onready var _not_training_panel = $Panel/NoTraining
 
 onready var buy_button = $Panel/NoTraining/CoachBar/BuyButton
 onready var cancel_training_button = $Panel/Training/CancelTraining
@@ -16,7 +16,7 @@ func _ready() -> void:
 	var coach = State.saved_game.coach
 	_on_coach_changed(coach)
 	_on_currency_changed(State.saved_game.currency)
-	_on_training_changed(State.saved_game.get("training"))
+	_on_training_changed(State.saved_game.training)
 
 func _on_coach_changed(new_coach) -> void:
 	if new_coach == 0:
@@ -42,21 +42,21 @@ func _on_buy_coach_button() -> void:
 	State.saved_game.upgrade_coach()
 	State.saved_game.pay_currency(get_coach_price())
 
-func _on_training_changed(new_training) -> void:
-	if new_training != null:
-		training.show()
-		not_training.hide()
+func _on_training_changed(training : Dictionary) -> void:
+	if training.empty():
+		_training_panel.hide()
+		_not_training_panel.show()
 	else:
-		training.hide()
-		not_training.show()
+		_training_panel.show()
+		_not_training_panel.hide()
 
 func _on_cancel_training_button_pressed() -> void:
 	State.saved_game.set_training(null)
 
 func _process(_delta : float) -> void:
-	var training_in_progress = State.saved_game.get("training")
+	var training_in_progress : Dictionary = State.saved_game.training
 
-	if training_in_progress:
+	if not training_in_progress.empty():
 		var now = OS.get_unix_time()
 		var percentage = (now - training_in_progress.start) / training_in_progress.duration
 		$Panel/Training/ProgressBar.value = percentage * 100
