@@ -5,8 +5,8 @@ extends GameTab
 # var a = 2
 # var b = "text"
 
-onready var mutation_scene = preload("res://src/game/StatsUI/Mutation.tscn")
-onready var stat_scene = preload("res://src/game/StatsUI/Stat.tscn")
+onready var mutation_scene = preload("res://src/game/stats_ui/Mutation.tscn")
+onready var stat_scene = preload("res://src/game/stats_ui/Stat.tscn")
 
 onready var stats_box = $StatsPanel/VBoxContainer
 onready var mutation_box = $MutationPanel/VBoxContainer

@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "MutationBox",
 "language": "GDScript",
-"path": "res://src/game/StatsUI/Mutation.gd"
+"path": "res://src/game/stats_ui/Mutation.gd"
 }, {
 "base": "HoboResource",
 "class": "SavedGame",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "StatBox",
 "language": "GDScript",
-"path": "res://src/game/StatsUI/Stat.gd"
+"path": "res://src/game/stats_ui/Stat.gd"
 } ]
 _global_script_class_icons={
 "GameTab": "",
