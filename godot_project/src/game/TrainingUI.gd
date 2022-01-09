@@ -1,20 +1,20 @@
 extends GameTab
 
-onready var _training_panel = $Panel/Training
-onready var _not_training_panel = $Panel/NoTraining
+onready var _training_control = $MC/VB/TrainingControl/MC/Training
+onready var _not_training_control = $MC/VB/TrainingControl/MC/NoTraining
 
-onready var buy_button = $Panel/NoTraining/CoachBar/BuyButton
-onready var cancel_training_button = $Panel/Training/CancelTraining
+onready var _buy_button = $MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar/BuyButton
+onready var _cancel_button = $MC/VB/TrainingControl/MC/Training/VB/CancelButton
 
-onready var _battle_button := $MC/HB/BattleButton
-onready var _stats_button := $MC/HB/StatsButton
+onready var _battle_button := $MC/VB/ButtonHBox/BattleButton
+onready var _stats_button := $MC/VB/ButtonHBox/StatsButton
 
 func _ready() -> void:
 	State.saved_game.connect("training_changed", self, "_on_training_changed")
 	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
 	State.saved_game.connect("coach_changed", self, "_on_coach_changed")
-	buy_button.connect("pressed", self, "_on_buy_coach_button")
-	cancel_training_button.connect("pressed", self, "_on_cancel_training_button_pressed")
+	_buy_button.connect("pressed", self, "_on_buy_coach_button")
+	_cancel_button.connect("pressed", self, "_on_cancel_training_button_pressed")
 
 	var coach = State.saved_game.coach
 	_on_coach_changed(coach)
@@ -26,13 +26,13 @@ func _ready() -> void:
 
 func _on_coach_changed(new_coach) -> void:
 	if new_coach == 0:
-		$Panel/NoTraining/CoachBar/CoachName.text = "NO COACH"
-		$Panel/NoTraining/CoachBar/BuyButton.text = "HIRE COACH"
-		$Panel/NoTraining/TrainingOptions.hide()
+		$MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar/CoachName.text = "NO COACH"
+		_buy_button.text = "HIRE COACH"
+		$MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions.hide()
 	else:
-		$Panel/NoTraining/CoachBar/CoachName.text = "LV." + str(new_coach) + " COACH"
-		$Panel/NoTraining/CoachBar/BuyButton.text = "UPGRADE COACH"
-		$Panel/NoTraining/TrainingOptions.show()
+		$MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar/CoachName.text = "LV." + str(new_coach) + " COACH"
+		_buy_button.text = "UPGRADE COACH"
+		$MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions.show()
 
 func get_coach_price() -> int:
 	return (100 + 1100 * State.saved_game.coach) * pow(1.6, State.saved_game.coach)
@@ -40,9 +40,9 @@ func get_coach_price() -> int:
 func _on_currency_changed(new_currency) -> void:
 	var coach_price = get_coach_price()
 	if new_currency > coach_price:
-		buy_button.disabled = false
+		_buy_button.disabled = false
 	else:
-		buy_button.disabled = true
+		_buy_button.disabled = true
 
 func _on_buy_coach_button() -> void:
 	State.saved_game.upgrade_coach()
@@ -50,11 +50,11 @@ func _on_buy_coach_button() -> void:
 
 func _on_training_changed(training : Dictionary) -> void:
 	if training.empty():
-		_training_panel.hide()
-		_not_training_panel.show()
+		_training_control.hide()
+		_not_training_control.show()
 	else:
-		_training_panel.show()
-		_not_training_panel.hide()
+		_training_control.show()
+		_not_training_control.hide()
 
 func _on_battle_button_pressed() -> void:
 	emit_signal("tab_change_requested", TYPE.BATTLE)
@@ -71,5 +71,5 @@ func _process(_delta : float) -> void:
 	if not training_in_progress.empty():
 		var now = OS.get_unix_time()
 		var percentage = (now - training_in_progress.start) / training_in_progress.duration
-		$Panel/Training/ProgressBar.value = percentage * 100
-		$Panel/Training/ProgressBar/RemainingTime.text = str(training_in_progress.duration - (now - training_in_progress.start)) + " sec REMAINING."
+		$MC/VB/TrainingControl/MC/Training/VB/VB/ProgressBar.value = percentage * 100
+		$MC/VB/TrainingControl/MC/Training/VB/VB/RemainingTime.text = str(training_in_progress.duration - (now - training_in_progress.start)) + " sec REMAINING."

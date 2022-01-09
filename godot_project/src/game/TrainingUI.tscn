@@ -1,22 +1,14 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/game/TrainingUI.gd" type="Script" id=1]
-[ext_resource path="res://textures/ui/trainingbox.png" type="Texture" id=2]
+[ext_resource path="res://src/game/training_ui/training_stylebox.tres" type="StyleBox" id=2]
 [ext_resource path="res://fonts/AcPlus_IBM_VGA_8x16.tres" type="DynamicFontData" id=3]
 [ext_resource path="res://src/game/training_ui/TrainingButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://textures/ui/bar.png" type="Texture" id=5]
 [ext_resource path="res://textures/ui/bar-empty.png" type="Texture" id=6]
 [ext_resource path="res://src/game/stats_ui/button_texture.tres" type="StyleBox" id=7]
-[ext_resource path="res://src/game/stats_ui/button_disabed.tres" type="StyleBox" id=8]
+[ext_resource path="res://src/game/stats_ui/button_disabled.tres" type="StyleBox" id=8]
 [ext_resource path="res://src/game/stats_ui/base_theme.tres" type="Theme" id=9]
-
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 246.833, 132.013 )
-margin_left = 33.3201
-margin_right = 171.361
-margin_top = 22.4084
-margin_bottom = 31.4316
 
 [sub_resource type="DynamicFont" id=4]
 extra_spacing_char = 4
@@ -51,151 +43,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="."]
-margin_left = 6.0
-margin_top = 17.0
-margin_right = 635.0
-margin_bottom = 383.0
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NoTraining" type="Control" parent="Panel"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TrainingOptions" type="GridContainer" parent="Panel/NoTraining"]
-visible = false
-margin_left = 24.0
-margin_top = 23.0
-margin_right = 595.0
-margin_bottom = 322.0
-theme = SubResource( 5 )
-custom_constants/vseparation = 20
-custom_constants/hseparation = 30
-columns = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TrainingButton" parent="Panel/NoTraining/TrainingOptions" instance=ExtResource( 4 )]
-margin_bottom = 65.0
-
-[node name="TrainingButton2" parent="Panel/NoTraining/TrainingOptions" instance=ExtResource( 4 )]
-margin_left = 200.0
-margin_right = 370.0
-margin_bottom = 65.0
-training = "def"
-
-[node name="TrainingButton3" parent="Panel/NoTraining/TrainingOptions" instance=ExtResource( 4 )]
-margin_left = 400.0
-margin_right = 570.0
-margin_bottom = 65.0
-training = "spd"
-
-[node name="TrainingButton4" parent="Panel/NoTraining/TrainingOptions" instance=ExtResource( 4 )]
-margin_top = 85.0
-margin_bottom = 150.0
-training = "regen"
-
-[node name="TrainingButton5" parent="Panel/NoTraining/TrainingOptions" instance=ExtResource( 4 )]
-margin_left = 200.0
-margin_top = 85.0
-margin_right = 370.0
-margin_bottom = 150.0
-training = "abs"
-
-[node name="TrainingButton6" parent="Panel/NoTraining/TrainingOptions" instance=ExtResource( 4 )]
-margin_left = 400.0
-margin_top = 85.0
-margin_right = 570.0
-margin_bottom = 150.0
-training = "hp"
-
-[node name="CoachBar" type="HBoxContainer" parent="Panel/NoTraining"]
-margin_left = 89.0
-margin_top = 280.0
-margin_right = 528.0
-margin_bottom = 325.0
-theme = SubResource( 5 )
-custom_constants/separation = 50
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CoachName" type="Label" parent="Panel/NoTraining/CoachBar"]
-margin_top = 14.0
-margin_right = 250.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 250, 0 )
-text = "NO COACH"
-
-[node name="BuyButton" type="Button" parent="Panel/NoTraining/CoachBar"]
-margin_left = 300.0
-margin_right = 439.529
-margin_bottom = 45.9369
-rect_min_size = Vector2( 120, 0 )
-text = "HIRE COACH"
-
-[node name="Training" type="Control" parent="Panel"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ProgressBar" type="ProgressBar" parent="Panel/Training"]
-margin_left = 56.0
-margin_top = 126.0
-margin_right = 566.0
-margin_bottom = 148.0
-theme = SubResource( 5 )
-custom_colors/font_color = Color( 0.802979, 0.895024, 0.988281, 1 )
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
-step = 0.1
-value = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel/Training/ProgressBar"]
-margin_left = 20.0
-margin_top = -20.0
-margin_right = 470.0
-margin_bottom = -4.0
-custom_colors/font_color = Color( 0.4, 0.698039, 1, 1 )
-text = "TR@INING IN PROGRESS"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RemainingTime" type="Label" parent="Panel/Training/ProgressBar"]
-margin_left = 64.0
-margin_top = 33.0
-margin_right = 434.0
-margin_bottom = 50.0
-custom_colors/font_color = Color( 0.4, 0.698039, 1, 1 )
-text = "10s REM@INING..."
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CancelTraining" type="Button" parent="Panel/Training"]
-margin_left = 198.0
-margin_top = 232.0
-margin_right = 392.529
-margin_bottom = 281.0
-theme = SubResource( 5 )
-text = "CANCEL TRAINING"
-
 [node name="MC" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -207,25 +54,246 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HB" type="HBoxContainer" parent="MC"]
+[node name="VB" type="VBoxContainer" parent="MC"]
 margin_left = 16.0
-margin_top = 419.0
+margin_top = 16.0
 margin_right = 624.0
 margin_bottom = 464.0
+
+[node name="TrainingControl" type="Control" parent="MC/VB"]
+margin_right = 608.0
+margin_bottom = 396.0
+size_flags_vertical = 3
+
+[node name="TrainingOutline" type="PanelContainer" parent="MC/VB/TrainingControl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MC" type="MarginContainer" parent="MC/VB/TrainingControl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Training" type="Control" parent="MC/VB/TrainingControl/MC"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 592.0
+margin_bottom = 380.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VB" type="VBoxContainer" parent="MC/VB/TrainingControl/MC/Training"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VB" type="VBoxContainer" parent="MC/VB/TrainingControl/MC/Training/VB"]
+margin_top = 80.0
+margin_right = 576.0
+margin_bottom = 160.0
+size_flags_vertical = 6
+size_flags_stretch_ratio = 2.0
+custom_constants/separation = 16
+
+[node name="Label" type="Label" parent="MC/VB/TrainingControl/MC/Training/VB/VB"]
+margin_right = 576.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0.4, 0.698039, 1, 1 )
+text = "TR@INING IN PROGRESS"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressBar" type="ProgressBar" parent="MC/VB/TrainingControl/MC/Training/VB/VB"]
+margin_left = 160.0
+margin_top = 32.0
+margin_right = 416.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 4
+theme = SubResource( 5 )
+custom_colors/font_color = Color( 0.802979, 0.895024, 0.988281, 1 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+step = 0.1
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemainingTime" type="Label" parent="MC/VB/TrainingControl/MC/Training/VB/VB"]
+margin_top = 64.0
+margin_right = 576.0
+margin_bottom = 80.0
+custom_colors/font_color = Color( 0.4, 0.698039, 1, 1 )
+text = "10s REM@INING..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="MC/VB/TrainingControl/MC/Training/VB"]
+margin_left = 191.0
+margin_top = 280.0
+margin_right = 384.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 128, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = SubResource( 5 )
+text = "CANCEL TRAINING"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoTraining" type="Control" parent="MC/VB/TrainingControl/MC"]
+visible = false
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 592.0
+margin_bottom = 380.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VB" type="VBoxContainer" parent="MC/VB/TrainingControl/MC/NoTraining"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrainingOptions" type="GridContainer" parent="MC/VB/TrainingControl/MC/NoTraining/VB"]
+margin_left = 3.0
+margin_top = 46.0
+margin_right = 573.0
+margin_bottom = 196.0
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 2.0
+theme = SubResource( 5 )
+custom_constants/vseparation = 20
+custom_constants/hseparation = 30
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TrainingButton" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 170.0
+margin_bottom = 65.0
+
+[node name="TrainingButton2" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 200.0
+margin_right = 370.0
+margin_bottom = 65.0
+training = "def"
+
+[node name="TrainingButton3" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 400.0
+margin_right = 570.0
+margin_bottom = 65.0
+training = "spd"
+
+[node name="TrainingButton4" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 85.0
+margin_right = 170.0
+margin_bottom = 150.0
+training = "regen"
+
+[node name="TrainingButton5" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 200.0
+margin_top = 85.0
+margin_right = 370.0
+margin_bottom = 150.0
+training = "abs"
+
+[node name="TrainingButton6" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 400.0
+margin_top = 85.0
+margin_right = 570.0
+margin_bottom = 150.0
+training = "hp"
+
+[node name="CoachBar" type="HBoxContainer" parent="MC/VB/TrainingControl/MC/NoTraining/VB"]
+margin_top = 246.0
+margin_right = 576.0
+margin_bottom = 367.0
+size_flags_vertical = 3
+theme = SubResource( 5 )
+custom_constants/separation = 50
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoachName" type="Label" parent="MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar"]
+margin_left = 6.0
+margin_top = 52.0
+margin_right = 256.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_horizontal = 6
+text = "NO COACH"
+align = 1
+
+[node name="BuyButton" type="Button" parent="MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar"]
+margin_left = 374.0
+margin_top = 37.0
+margin_right = 513.529
+margin_bottom = 82.9369
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "HIRE COACH"
+
+[node name="ButtonHBox" type="HBoxContainer" parent="MC/VB"]
+margin_top = 400.0
+margin_right = 608.0
+margin_bottom = 448.0
 size_flags_vertical = 8
 custom_constants/separation = 16
 alignment = 1
 
-[node name="BattleButton" type="Button" parent="MC/HB"]
+[node name="BattleButton" type="Button" parent="MC/VB/ButtonHBox"]
 margin_left = 168.0
 margin_right = 296.0
-margin_bottom = 45.9369
+margin_bottom = 48.0
 rect_min_size = Vector2( 128, 0 )
 text = "BATTLE"
 
-[node name="StatsButton" type="Button" parent="MC/HB"]
+[node name="StatsButton" type="Button" parent="MC/VB/ButtonHBox"]
 margin_left = 312.0
 margin_right = 440.0
-margin_bottom = 45.9369
+margin_bottom = 48.0
 rect_min_size = Vector2( 128, 0 )
 text = "STATS"
