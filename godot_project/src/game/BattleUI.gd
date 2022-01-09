@@ -22,8 +22,6 @@ onready var _monster_cooldown_timer := $HoboMonster/CooldownTimer
 
 onready var _pimp_button := $MarginContainer/VB/PimpButton
 
-onready var _currency_label := $MarginContainer/CurrencyLabel
-
 onready var _respawn_timer := $RespawnTimer
 
 var _monster : HoboMonster = null
