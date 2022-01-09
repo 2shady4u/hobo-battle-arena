@@ -1,12 +1,7 @@
 extends GameTab
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-onready var mutation_scene = preload("res://src/game/stats_ui/Mutation.tscn")
-onready var stat_scene = preload("res://src/game/stats_ui/Stat.tscn")
+const mutation_scene = preload("res://src/game/stats_ui/Mutation.tscn")
+const stat_scene = preload("res://src/game/stats_ui/Stat.tscn")
 
 onready var stats_box = $StatsPanel/VBoxContainer
 onready var mutation_box = $MutationPanel/VBoxContainer
@@ -64,12 +59,12 @@ var stats = ["hp", "atk", "def", "spd", "regen", "abs"]
 func _ready():
 	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
 	for stat in stats:
-		var stat_instance: StatBox = stat_scene.instance()
+		var stat_instance = stat_scene.instance()
 		stats_box.add_child(stat_instance)
 		stat_instance.set_stat(stat)
 
 	for mutation in mutations:
-		var mutation_instance: MutationBox = mutation_scene.instance()
+		var mutation_instance = mutation_scene.instance()
 		mutation_box.add_child(mutation_instance)
 		mutation_instance.set_data(mutation)
 
@@ -83,11 +78,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		State.saved_game.increase_currency(50)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-func get_formatted_money(money: int):
+static func get_formatted_money(money: int):
 	if money > 1_000_000_000:
 		return "%3.2f" % (money * 1.0 / 1_000_000_000) + "BS"
 	if money > 1_000_000:

@@ -20,7 +20,7 @@ func _on_coach_updated(new_coach):
 	update_training(State.saved_game.get_player_upgrades())
 
 func update_training(upgrades):
-	var coach = State.saved_game.get_player_coach()
+	var coach = State.saved_game.coach
 
 	if coach == 0:
 		hide()

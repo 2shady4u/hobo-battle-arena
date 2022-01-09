@@ -20,13 +20,17 @@ onready var _player_sprite := $Player
 onready var _player_cooldown_timer := $Player/CooldownTimer
 onready var _monster_cooldown_timer := $HoboMonster/CooldownTimer
 
+onready var _pimp_button := $MarginContainer/VB/PimpButton
+
 onready var _currency_label := $MarginContainer/CurrencyLabel
 
 onready var _respawn_timer := $RespawnTimer
 
 var _monster : HoboMonster = null
-var monster_health := 0
-var player_health := 0
+var _monster_health := 0
+var _player_health := 0
+
+var _previous_max_health := 0
 
 var saved_game : SavedGame = null
 
@@ -40,6 +44,9 @@ func _ready() -> void:
 
 	_player_cooldown_timer.connect("timeout", self, "_on_player_cooldown_timeout")
 	_monster_cooldown_timer.connect("timeout", self, "_on_monster_cooldown_timeout")
+
+	_pimp_button.connect("pressed", self, "_on_pimp_button_pressed")
+
 	_respawn_timer.connect("timeout", self, "_on_respawn_timer_timeout")
 
 	saved_game = State.saved_game
@@ -48,8 +55,8 @@ func _ready() -> void:
 	_spawn_monster()
 
 func _on_player_cooldown_timeout() -> void:
-	monster_health -= saved_game.get_player_attack_damage()
-	if monster_health <= 0:
+	_monster_health -= saved_game.get_player_attack_damage()
+	if _monster_health <= 0:
 		saved_game.currency += _monster.currency_on_death
 		_despawn_monster()
 		_respawn_timer.start()
@@ -57,23 +64,29 @@ func _on_player_cooldown_timeout() -> void:
 	update_monster_health_label()
 
 func _on_monster_cooldown_timeout() -> void:
-	player_health -= _monster.attack_damage
-	if player_health <= 0:
+	_player_health -= _monster.attack_damage
+	if _player_health <= 0:
 		pass
 
 	update_player_health_label()
+
+func _on_pimp_button_pressed() -> void:
+	emit_signal("tab_change_requested", TYPE.STATS)
 
 func _on_respawn_timer_timeout() -> void:
 	_spawn_monster()
 
 func _on_player_max_health_changed(player_max_health : int) -> void:
 	# We have to recalculate the remaining health!
+	var health_difference := player_max_health - _previous_max_health
+	_player_health += health_difference
+	_previous_max_health = player_max_health
 
 	update_player_health_label()
 
 func _spawn_player() -> void:
 	var max_health : int = saved_game.get_player_max_health()
-	player_health = max_health
+	_player_health = max_health
 	update_player_health_label()
 
 	_player_sprite.visible = true
@@ -85,7 +98,7 @@ func _spawn_monster() -> void:
 	_monster_name_label.text = _monster.name
 
 	var max_health : int = _monster.health_points
-	monster_health = max_health
+	_monster_health = max_health
 	update_monster_health_label()
 
 	_monster_sprite.visible = true
@@ -99,11 +112,11 @@ func _despawn_monster():
 
 func update_monster_health_label() -> void:
 	var max_health : int = _monster.health_points
-	_monster_health_label.text = HEALTH_BAR.format([monster_health, max_health])
+	_monster_health_label.text = HEALTH_BAR.format([_monster_health, max_health])
 
 func update_player_health_label() -> void:
 	var max_health : int = saved_game.get_player_max_health()
-	_player_health_label.text = HEALTH_BAR.format([player_health, max_health])
+	_player_health_label.text = HEALTH_BAR.format([_player_health, max_health])
 
 const EPITHETS := [
 	"pathetic",

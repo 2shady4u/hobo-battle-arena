@@ -1,14 +1,17 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://textures/doghobo.png" type="Texture" id=1]
 [ext_resource path="res://src/game/BattleUI.gd" type="Script" id=2]
 [ext_resource path="res://textures/background.png" type="Texture" id=3]
-[ext_resource path="res://fonts/Ac437_ACM_VGA_8x8_dynamicfont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://fonts/AcPlus_IBM_VGA_8x16.tres" type="DynamicFontData" id=4]
 [ext_resource path="res://src/game/battle_ui/CurrencyLabel.gd" type="Script" id=5]
 [ext_resource path="res://textures/playerhobo.png" type="Texture" id=6]
+[ext_resource path="res://src/game/stats_ui/button_texture.tres" type="StyleBox" id=7]
+[ext_resource path="res://src/game/stats_ui/button_disabed.tres" type="StyleBox" id=8]
+[ext_resource path="res://fonts/AcPlus_IBM_VGA_8x16_dynamicfont.tres" type="DynamicFont" id=9]
 
 [sub_resource type="Theme" id=3]
-default_font = ExtResource( 4 )
+default_font = ExtResource( 9 )
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -26,6 +29,18 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=4]
+extra_spacing_char = 4
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+Button/styles/disabled = ExtResource( 8 )
+Button/styles/focus = ExtResource( 7 )
+Button/styles/hover = ExtResource( 7 )
+Button/styles/normal = ExtResource( 7 )
+Button/styles/pressed = ExtResource( 7 )
 
 [node name="BattleUI" type="Control"]
 anchor_right = 1.0
@@ -75,14 +90,14 @@ size_flags_vertical = 0
 alignment = 1
 
 [node name="PlayerVBox" type="VBoxContainer" parent="MarginContainer/HB"]
-margin_right = 351.0
+margin_right = 293.0
 margin_bottom = 36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HB/PlayerVBox"]
-margin_right = 351.0
+margin_right = 293.0
 margin_bottom = 16.0
 size_flags_horizontal = 2
 text = "Pathetic Hobo (that's you!)"
@@ -90,13 +105,13 @@ valign = 1
 
 [node name="HealthLabel" type="Label" parent="MarginContainer/HB/PlayerVBox"]
 margin_top = 20.0
-margin_right = 351.0
+margin_right = 293.0
 margin_bottom = 36.0
 text = "100/100"
 valign = 1
 
 [node name="MonsterVBox" type="VBoxContainer" parent="MarginContainer/HB"]
-margin_left = 504.0
+margin_left = 524.0
 margin_right = 608.0
 margin_bottom = 36.0
 size_flags_horizontal = 10
@@ -105,7 +120,7 @@ __meta__ = {
 }
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HB/MonsterVBox"]
-margin_right = 104.0
+margin_right = 84.0
 margin_bottom = 16.0
 size_flags_horizontal = 2
 text = "Hobo Dog"
@@ -114,16 +129,33 @@ valign = 1
 
 [node name="HealthLabel" type="Label" parent="MarginContainer/HB/MonsterVBox"]
 margin_top = 20.0
-margin_right = 104.0
+margin_right = 84.0
 margin_bottom = 36.0
 text = "100/100"
 align = 2
 
-[node name="CurrencyLabel" type="Label" parent="MarginContainer"]
+[node name="VB" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 16.0
-margin_top = 448.0
+margin_top = 16.0
 margin_right = 624.0
 margin_bottom = 464.0
+custom_constants/separation = 16
+alignment = 2
+
+[node name="PimpButton" type="Button" parent="MarginContainer/VB"]
+margin_left = 223.0
+margin_top = 368.0
+margin_right = 384.529
+margin_bottom = 416.0
+rect_min_size = Vector2( 128, 48 )
+size_flags_horizontal = 4
+theme = SubResource( 5 )
+text = "PIMP UR HOBO"
+
+[node name="CurrencyLabel" type="Label" parent="MarginContainer/VB"]
+margin_top = 432.0
+margin_right = 608.0
+margin_bottom = 448.0
 size_flags_vertical = 8
 text = "Used syringes: 10"
 script = ExtResource( 5 )

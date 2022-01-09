@@ -3,7 +3,8 @@ class_name GameTab
 
 enum TYPE {
 	BATTLE,
-	CHARACTER,
+	STATS,
+	TRAINING,
 }
 
 export(TYPE) var type := TYPE.BATTLE

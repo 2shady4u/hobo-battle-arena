@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/game/StatsUI.gd" type="Script" id=1]
 [ext_resource path="res://textures/ui/mutationbox.png" type="Texture" id=2]
 [ext_resource path="res://textures/ui/stats.png" type="Texture" id=3]
-[ext_resource path="res://src/game/stats_ui/base_theme.tres" type="Theme" id=4]
+[ext_resource path="res://fonts/AcPlus_IBM_VGA_8x16.tres" type="DynamicFontData" id=4]
+[ext_resource path="res://src/game/stats_ui/button_texture.tres" type="StyleBox" id=5]
+[ext_resource path="res://src/game/stats_ui/button_disabed.tres" type="StyleBox" id=6]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -35,6 +37,18 @@ margin_left = 17.0
 margin_right = 114.0
 margin_top = 25.0
 margin_bottom = 17.0
+
+[sub_resource type="DynamicFont" id=4]
+extra_spacing_char = 4
+font_data = ExtResource( 4 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+Button/styles/disabled = ExtResource( 6 )
+Button/styles/focus = ExtResource( 5 )
+Button/styles/hover = ExtResource( 5 )
+Button/styles/normal = ExtResource( 5 )
+Button/styles/pressed = ExtResource( 5 )
 
 [node name="StatsUI" type="Control"]
 anchor_right = 1.0
@@ -90,7 +104,10 @@ margin_top = 66.0
 margin_right = 597.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 150, 0 )
-theme = ExtResource( 4 )
+theme = SubResource( 5 )
 text = "w"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
