@@ -22,9 +22,9 @@ text = "HELLO"
 valign = 1
 
 [node name="Price" type="Label" parent="."]
-margin_left = 457.0
+margin_left = 458.0
 margin_top = 232.0
-margin_right = 530.0
+margin_right = 531.0
 margin_bottom = 248.0
 size_flags_horizontal = 10
 text = "1.31K S"
@@ -32,10 +32,10 @@ align = 2
 valign = 1
 
 [node name="BuyButton" type="Button" parent="."]
-margin_left = 534.0
-margin_top = 217.0
-margin_right = 640.529
-margin_bottom = 262.937
+margin_left = 535.0
+margin_top = 216.0
+margin_right = 640.0
+margin_bottom = 264.0
 focus_mode = 0
 size_flags_vertical = 4
 custom_colors/font_color_disabled = Color( 0.415686, 0.415686, 0.415686, 1 )

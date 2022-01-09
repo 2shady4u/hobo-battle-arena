@@ -26,6 +26,7 @@ __meta__ = {
 }
 
 [node name="BattleUI" parent="TabContainer" instance=ExtResource( 1 )]
+type = null
 
 [node name="StatsUI" parent="TabContainer" instance=ExtResource( 3 )]
 visible = false

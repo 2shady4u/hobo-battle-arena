@@ -7,7 +7,7 @@
 [ext_resource path="res://textures/ui/bar.png" type="Texture" id=5]
 [ext_resource path="res://textures/ui/bar-empty.png" type="Texture" id=6]
 [ext_resource path="res://src/game/stats_ui/button_texture.tres" type="StyleBox" id=7]
-[ext_resource path="res://src/game/stats_ui/button_disabled.tres" type="StyleBox" id=8]
+[ext_resource path="res://src/game/stats_ui/button_disabed.tres" type="StyleBox" id=8]
 [ext_resource path="res://src/game/stats_ui/base_theme.tres" type="Theme" id=9]
 
 [sub_resource type="DynamicFont" id=4]
@@ -85,6 +85,7 @@ __meta__ = {
 }
 
 [node name="Training" type="Control" parent="MC/VB/TrainingControl/MC"]
+visible = false
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 592.0
@@ -164,7 +165,6 @@ __meta__ = {
 }
 
 [node name="NoTraining" type="Control" parent="MC/VB/TrainingControl/MC"]
-visible = false
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 592.0
@@ -182,9 +182,9 @@ __meta__ = {
 
 [node name="TrainingOptions" type="GridContainer" parent="MC/VB/TrainingControl/MC/NoTraining/VB"]
 margin_left = 3.0
-margin_top = 46.0
+margin_top = 42.0
 margin_right = 573.0
-margin_bottom = 196.0
+margin_bottom = 198.0
 size_flags_horizontal = 4
 size_flags_vertical = 6
 size_flags_stretch_ratio = 2.0
@@ -200,14 +200,14 @@ __meta__ = {
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 170.0
-margin_bottom = 65.0
+margin_bottom = 68.0
 
 [node name="TrainingButton2" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 200.0
 margin_right = 370.0
-margin_bottom = 65.0
+margin_bottom = 68.0
 training = "def"
 
 [node name="TrainingButton3" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
@@ -215,62 +215,71 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 400.0
 margin_right = 570.0
-margin_bottom = 65.0
+margin_bottom = 68.0
 training = "spd"
 
 [node name="TrainingButton4" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 85.0
+margin_top = 88.0
 margin_right = 170.0
-margin_bottom = 150.0
+margin_bottom = 156.0
 training = "regen"
 
 [node name="TrainingButton5" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 200.0
-margin_top = 85.0
+margin_top = 88.0
 margin_right = 370.0
-margin_bottom = 150.0
+margin_bottom = 156.0
 training = "abs"
 
 [node name="TrainingButton6" parent="MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 400.0
-margin_top = 85.0
+margin_top = 88.0
 margin_right = 570.0
-margin_bottom = 150.0
+margin_bottom = 156.0
 training = "hp"
 
 [node name="CoachBar" type="HBoxContainer" parent="MC/VB/TrainingControl/MC/NoTraining/VB"]
-margin_top = 246.0
+margin_top = 244.0
 margin_right = 576.0
-margin_bottom = 367.0
+margin_bottom = 364.0
+rect_min_size = Vector2( 576, 120 )
 size_flags_vertical = 3
 theme = SubResource( 5 )
-custom_constants/separation = 50
-alignment = 1
+custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CoachName" type="Label" parent="MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar"]
-margin_left = 6.0
 margin_top = 52.0
-margin_right = 256.0
+margin_right = 250.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 250, 0 )
 size_flags_horizontal = 6
 text = "NO COACH"
 align = 1
 
+[node name="CoachPrice" type="Label" parent="MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar"]
+margin_left = 299.0
+margin_top = 52.0
+margin_right = 363.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 64, 0 )
+size_flags_horizontal = 6
+text = "10S"
+align = 2
+
 [node name="BuyButton" type="Button" parent="MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar"]
-margin_left = 374.0
-margin_top = 37.0
-margin_right = 513.529
-margin_bottom = 82.9369
+margin_left = 425.0
+margin_top = 36.0
+margin_right = 563.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 120, 0 )
 size_flags_horizontal = 6
 size_flags_vertical = 4

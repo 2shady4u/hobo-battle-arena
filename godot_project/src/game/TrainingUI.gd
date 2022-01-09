@@ -33,6 +33,7 @@ func _on_coach_changed(new_coach) -> void:
 		$MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar/CoachName.text = "LV." + str(new_coach) + " COACH"
 		_buy_button.text = "UPGRADE COACH"
 		$MC/VB/TrainingControl/MC/NoTraining/VB/TrainingOptions.show()
+	$MC/VB/TrainingControl/MC/NoTraining/VB/CoachBar/CoachPrice.text = get_formatted_money(get_coach_price())
 
 func get_coach_price() -> int:
 	return (100 + 1100 * State.saved_game.coach) * pow(1.6, State.saved_game.coach)
@@ -73,3 +74,13 @@ func _process(_delta : float) -> void:
 		var percentage = (now - training_in_progress.start) / training_in_progress.duration
 		$MC/VB/TrainingControl/MC/Training/VB/VB/ProgressBar.value = percentage * 100
 		$MC/VB/TrainingControl/MC/Training/VB/VB/RemainingTime.text = str(training_in_progress.duration - (now - training_in_progress.start)) + " sec REMAINING."
+
+
+static func get_formatted_money(money: int):
+	if money > 1_000_000_000:
+		return "%3.2f" % (money * 1.0 / 1_000_000_000) + "BS"
+	if money > 1_000_000:
+		return "%3.2f" % (money * 1.0 / 1_000_000) + "MS"
+	if money > 1_000:
+		return "%3.2f" % (money * 1.0 / 1_000) + "KS"
+	return "%3d" % money + "S"
