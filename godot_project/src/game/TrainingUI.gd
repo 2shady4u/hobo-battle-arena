@@ -1,19 +1,12 @@
 extends GameTab
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 onready var training = $Panel/Training
 onready var not_training = $Panel/NoTraining
 
 onready var buy_button = $Panel/NoTraining/CoachBar/BuyButton
 onready var cancel_training_button = $Panel/Training/CancelTraining
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	State.saved_game.connect("training_changed", self, "_on_training_changed")
 	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
 	State.saved_game.connect("coach_changed", self, "_on_coach_changed")
@@ -23,9 +16,9 @@ func _ready():
 	var coach = State.saved_game.coach
 	_on_coach_changed(coach)
 	_on_currency_changed(State.saved_game.currency)
-	_on_training_changed(State.saved_game.training)
+	_on_training_changed(State.saved_game.get("training"))
 
-func _on_coach_changed(new_coach):
+func _on_coach_changed(new_coach) -> void:
 	if new_coach == 0:
 		$Panel/NoTraining/CoachBar/CoachName.text = "NO COACH"
 		$Panel/NoTraining/CoachBar/BuyButton.text = "HIRE COACH"
@@ -38,18 +31,18 @@ func _on_coach_changed(new_coach):
 func get_coach_price() -> int:
 	return (100 + 1100 * State.saved_game.coach) * pow(1.6, State.saved_game.coach)
 
-func _on_currency_changed(new_currency):
+func _on_currency_changed(new_currency) -> void:
 	var coach_price = get_coach_price()
 	if new_currency > coach_price:
 		buy_button.disabled = false
 	else:
 		buy_button.disabled = true
 
-func _on_buy_coach_button():
+func _on_buy_coach_button() -> void:
 	State.saved_game.upgrade_coach()
 	State.saved_game.pay_currency(get_coach_price())
 
-func _on_training_changed(new_training):
+func _on_training_changed(new_training) -> void:
 	if new_training != null:
 		training.show()
 		not_training.hide()
@@ -57,18 +50,14 @@ func _on_training_changed(new_training):
 		training.hide()
 		not_training.show()
 
-func _on_cancel_training_button_pressed():
+func _on_cancel_training_button_pressed() -> void:
 	State.saved_game.set_training(null)
 
-func _process(delta):
-	var training_in_progress = State.saved_game.training
+func _process(_delta : float) -> void:
+	var training_in_progress = State.saved_game.get("training")
 
 	if training_in_progress:
 		var now = OS.get_unix_time()
 		var percentage = (now - training_in_progress.start) / training_in_progress.duration
 		$Panel/Training/ProgressBar.value = percentage * 100
 		$Panel/Training/ProgressBar/RemainingTime.text = str(training_in_progress.duration - (now - training_in_progress.start)) + " sec REMAINING."
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

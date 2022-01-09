@@ -21,13 +21,11 @@ func get_player_attack_speed() -> int:
 	# TODO: Add some crazy algorithm that calculates the player's attack speed
 	return 1
 
-
 func get_player_upgrades() -> Dictionary:
 	return self.upgrades
 
 func get_player_training():
 	return self.training
-
 
 func get_stats() -> Dictionary:
 	var stats = {

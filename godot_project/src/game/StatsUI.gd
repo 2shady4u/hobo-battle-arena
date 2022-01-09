@@ -73,8 +73,7 @@ func _ready():
 func _on_currency_changed(currency):
 	$Currency.text = get_formatted_money(currency)
 
-
-func _process(delta):
+func _process(_delta : float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		State.saved_game.increase_currency(50)
 
