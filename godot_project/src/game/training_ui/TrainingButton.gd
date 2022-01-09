@@ -11,13 +11,13 @@ func _ready():
 
 	button.connect("pressed", self, "_on_button_pressed")
 
-	update_training(State.saved_game.get_player_upgrades())
+	update_training(State.saved_game.upgrades)
 
 func _on_upgrades_updated(new_upgrades):
 	update_training(new_upgrades)
 
 func _on_coach_updated(new_coach):
-	update_training(State.saved_game.get_player_upgrades())
+	update_training(State.saved_game.upgrades)
 
 func update_training(upgrades):
 	var coach = State.saved_game.coach
@@ -36,8 +36,8 @@ func update_training(upgrades):
 	duration_label.text = str(get_duration()) + " sec."
 
 func get_duration():
-	var upgrades = State.saved_game.get_player_upgrades()
-	var coach = State.saved_game.get_player_coach()
+	var upgrades = State.saved_game.upgrades
+	var coach = State.saved_game.coach
 	var string = training + "_training"
 	if string in upgrades:
 		return 100.0 * (pow(1.8, upgrades[string].level)) / pow(2, coach)
@@ -45,14 +45,14 @@ func get_duration():
 		return 15.0
 
 func _on_button_pressed():
-	State.saved_game.set_training({
+	State.saved_game.traing = {
 		"type": training,
 		"start": OS.get_unix_time(),
 		"duration": get_duration()
-	})
+	}
 
 func _process(true):
-	var training_in_progress = State.saved_game.get_player_training()
+	var training_in_progress = State.saved_game.training
 
 	if training_in_progress:
 		if training_in_progress.type == training:

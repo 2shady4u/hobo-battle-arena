@@ -20,10 +20,10 @@ func _ready():
 	buy_button.connect("pressed", self, "_on_buy_coach_button")
 	cancel_training_button.connect("pressed", self, "_on_cancel_training_button_pressed")
 
-	var coach = State.saved_game.get_player_coach()
+	var coach = State.saved_game.coach
 	_on_coach_changed(coach)
-	_on_currency_changed(State.saved_game.get_player_currency())
-	_on_training_changed(State.saved_game.get_player_training())
+	_on_currency_changed(State.saved_game.currency)
+	_on_training_changed(State.saved_game.training)
 
 func _on_coach_changed(new_coach):
 	if new_coach == 0:
@@ -35,8 +35,11 @@ func _on_coach_changed(new_coach):
 		$Panel/NoTraining/CoachBar/BuyButton.text = "UPGRADE COACH"
 		$Panel/NoTraining/TrainingOptions.show()
 
+func get_coach_price() -> int:
+	return (100 + 1100 * State.saved_game.coach) * pow(1.6, State.saved_game.coach)
+
 func _on_currency_changed(new_currency):
-	var coach_price = (100 + 1100 * State.saved_game.get_player_coach()) * pow(1.6, State.saved_game.get_player_coach())
+	var coach_price = get_coach_price()
 	if new_currency > coach_price:
 		buy_button.disabled = false
 	else:
@@ -44,6 +47,7 @@ func _on_currency_changed(new_currency):
 
 func _on_buy_coach_button():
 	State.saved_game.upgrade_coach()
+	State.saved_game.pay_currency(get_coach_price())
 
 func _on_training_changed(new_training):
 	if new_training != null:
@@ -56,8 +60,8 @@ func _on_training_changed(new_training):
 func _on_cancel_training_button_pressed():
 	State.saved_game.set_training(null)
 
-func _process(true):
-	var training_in_progress = State.saved_game.get_player_training()
+func _process(delta):
+	var training_in_progress = State.saved_game.training
 
 	if training_in_progress:
 		var now = OS.get_unix_time()

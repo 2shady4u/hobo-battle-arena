@@ -12,7 +12,6 @@ var mutation_data = null
 func _ready():
 	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
 	State.saved_game.connect("upgrades_changed", self, "_on_upgrades_changed")
-	pass # Replace with function body.
 	buy_button.connect("pressed", self, "_on_buy_button_pressed")
 
 
@@ -24,7 +23,7 @@ func set_data(data):
 	mutation_data = data
 	name_label.text = data.title
 
-	var mutations = State.saved_game.get_player_upgrades()
+	var mutations = State.saved_game.upgrades
 
 	if data.name in mutations:
 		buy_button.text = "UPGRADE"
@@ -38,14 +37,13 @@ func set_data(data):
 		actual_price = data.price / 2
 		price.text = get_formatted_price()
 
-	var currency = State.saved_game.get_player_currency()
+	var currency = State.saved_game.currency
 	if actual_price > currency:
 		buy_button.disabled = true
 	else:
 		buy_button.disabled = false
 
 func _on_currency_changed(new_currency):
-	print("Currency changed!")
 	if actual_price > new_currency:
 		buy_button.disabled = true
 	else:

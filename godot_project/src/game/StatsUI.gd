@@ -68,7 +68,7 @@ func _ready():
 		mutation_box.add_child(mutation_instance)
 		mutation_instance.set_data(mutation)
 
-	$Currency.text = get_formatted_money(State.saved_game.get_player_currency())
+	$Currency.text = get_formatted_money(State.saved_game.currency)
 
 func _on_currency_changed(currency):
 	$Currency.text = get_formatted_money(currency)

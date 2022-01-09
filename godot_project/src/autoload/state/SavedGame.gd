@@ -23,10 +23,10 @@ func get_player_attack_speed() -> int:
 
 
 func get_player_upgrades() -> Dictionary:
-	return _get("upgrades")
+	return self.upgrades
 
 func get_player_training():
-	return _get("training")
+	return self.training
 
 
 func get_stats() -> Dictionary:
@@ -75,19 +75,13 @@ func buy_mutation(mutation: Dictionary):
 		upgrades[mutation.name].type = "mutation"
 		upgrades[mutation.name].level = 1
 
-	_set("upgrades", upgrades)
+	self.upgrades = upgrades
 
 func pay_currency(value: int):
-	_set("currency", max(_get("currency") - value, 0))
-
-func get_player_coach():
-	return _get("coach")
+	self.currency = max(self.currency - value, 0)
 
 func upgrade_coach():
-	_set("coach", get_player_coach() + 1)
-
-func set_training(new_training):
-	_set("training", new_training)
+	self.coach = self.coach + 1
 
 func finish_training():
 	var training = _get("training")
@@ -106,5 +100,5 @@ func finish_training():
 				"type": "training"
 			}
 
-		_set("upgrades", upgrades)
-		_set("training", null)
+		self.upgrades = upgrades
+		self.training = null
