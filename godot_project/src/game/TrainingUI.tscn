@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/game/TrainingUI.gd" type="Script" id=1]
 [ext_resource path="res://textures/ui/trainingbox.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://textures/ui/bar-empty.png" type="Texture" id=6]
 [ext_resource path="res://src/game/stats_ui/button_texture.tres" type="StyleBox" id=7]
 [ext_resource path="res://src/game/stats_ui/button_disabed.tres" type="StyleBox" id=8]
+[ext_resource path="res://src/game/stats_ui/base_theme.tres" type="Theme" id=9]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -44,6 +45,7 @@ region_rect = Rect2( 0, 0, 16, 16 )
 [node name="TrainingUI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 9 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -62,6 +64,9 @@ __meta__ = {
 [node name="NoTraining" type="Control" parent="Panel"]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TrainingOptions" type="GridContainer" parent="Panel/NoTraining"]
 visible = false
@@ -190,3 +195,37 @@ margin_right = 392.529
 margin_bottom = 281.0
 theme = SubResource( 5 )
 text = "CANCEL TRAINING"
+
+[node name="MC" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 16
+custom_constants/margin_top = 16
+custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HB" type="HBoxContainer" parent="MC"]
+margin_left = 16.0
+margin_top = 419.0
+margin_right = 624.0
+margin_bottom = 464.0
+size_flags_vertical = 8
+custom_constants/separation = 16
+alignment = 1
+
+[node name="BattleButton" type="Button" parent="MC/HB"]
+margin_left = 168.0
+margin_right = 296.0
+margin_bottom = 45.9369
+rect_min_size = Vector2( 128, 0 )
+text = "BATTLE"
+
+[node name="StatsButton" type="Button" parent="MC/HB"]
+margin_left = 312.0
+margin_right = 440.0
+margin_bottom = 45.9369
+rect_min_size = Vector2( 128, 0 )
+text = "STATS"

@@ -6,6 +6,9 @@ onready var _not_training_panel = $Panel/NoTraining
 onready var buy_button = $Panel/NoTraining/CoachBar/BuyButton
 onready var cancel_training_button = $Panel/Training/CancelTraining
 
+onready var _battle_button := $MC/HB/BattleButton
+onready var _stats_button := $MC/HB/StatsButton
+
 func _ready() -> void:
 	State.saved_game.connect("training_changed", self, "_on_training_changed")
 	State.saved_game.connect("currency_changed", self, "_on_currency_changed")
@@ -17,6 +20,9 @@ func _ready() -> void:
 	_on_coach_changed(coach)
 	_on_currency_changed(State.saved_game.currency)
 	_on_training_changed(State.saved_game.training)
+
+	_battle_button.connect("pressed", self, "_on_battle_button_pressed")
+	_stats_button.connect("pressed", self, "_on_stats_button_pressed")
 
 func _on_coach_changed(new_coach) -> void:
 	if new_coach == 0:
@@ -49,6 +55,12 @@ func _on_training_changed(training : Dictionary) -> void:
 	else:
 		_training_panel.show()
 		_not_training_panel.hide()
+
+func _on_battle_button_pressed() -> void:
+	emit_signal("tab_change_requested", TYPE.BATTLE)
+
+func _on_stats_button_pressed() -> void:
+	emit_signal("tab_change_requested", TYPE.STATS)
 
 func _on_cancel_training_button_pressed() -> void:
 	State.saved_game.set_training(null)

@@ -6,25 +6,27 @@
 [node name="Stat" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -640.0
-margin_bottom = -480.0
 theme = ExtResource( 2 )
+alignment = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Stat" type="Label" parent="."]
-margin_right = 50.0
-margin_bottom = 16.0
+margin_left = 268.0
+margin_top = 232.0
+margin_right = 318.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 50, 0 )
 text = "STR"
 valign = 1
 
 [node name="Value" type="Label" parent="."]
-margin_left = 54.0
-margin_right = 104.0
-margin_bottom = 16.0
+margin_left = 322.0
+margin_top = 232.0
+margin_right = 372.0
+margin_bottom = 248.0
 rect_min_size = Vector2( 50, 0 )
 text = "50"
 align = 2
