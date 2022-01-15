@@ -8,18 +8,23 @@ func _init():
 	add_property("upgrades", {}) # contains bought mutations and completed trainings
 	add_property("training", {})
 	add_property("coach", 0)
+	add_property("floor_index", 0)
 
 func get_player_max_health() -> int:
 	# TODO: Add some crazy algorithm that calculates the player's max health!
-	return 100
+	return get_stat_value("hp")
 
 func get_player_attack_damage() -> int:
 	# TODO: Add some crazy algorithm that calculates the player's attack damage
-	return 2
+	return get_stat_value("atk")
 
 func get_player_attack_speed() -> int:
 	# TODO: Add some crazy algorithm that calculates the player's attack speed
 	return 1
+
+func get_floor() -> BattleFloor:
+	var current_floor : BattleFloor = load("res://resources/battle_floors/TheRedGutter.tres")
+	return current_floor
 
 func get_stats() -> Dictionary:
 	var stats = {

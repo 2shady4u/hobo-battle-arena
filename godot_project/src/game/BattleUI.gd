@@ -22,6 +22,8 @@ onready var _player_sprite := $Player
 onready var _player_cooldown_timer := $Player/CooldownTimer
 onready var _monster_cooldown_timer := $HoboMonster/CooldownTimer
 
+onready var _kill_count_label := $MarginContainer/VB/HB/KillCountLabel
+
 onready var _pimp_button := $MarginContainer/VB/PimpButton
 
 onready var _respawn_timer := $RespawnTimer
@@ -30,17 +32,14 @@ var _monster : HoboMonster = null
 var _monster_health := 0
 var _player_health := 0
 
+var _kill_count := 0
+
 var _previous_max_health := 0
 
 var saved_game : SavedGame = null
 
 func _ready() -> void:
 	randomize()
-
-	var epithet : String = EPITHETS[randi() % EPITHETS.size()]
-	epithet = epithet.capitalize()
-
-	_player_name_label.text = PLAYER_NAME.format([epithet])
 
 	_player_cooldown_timer.connect("timeout", self, "_on_player_cooldown_timeout")
 	_monster_cooldown_timer.connect("timeout", self, "_on_monster_cooldown_timeout")
@@ -58,7 +57,7 @@ func _on_player_cooldown_timeout() -> void:
 	_monster_health -= saved_game.get_player_attack_damage()
 	if _monster_health <= 0:
 		saved_game.currency += _monster.currency_on_death
-		_despawn_monster()
+		_on_monster_defeated()
 		_respawn_timer.start()
 
 	update_monster_health_label()
@@ -66,7 +65,8 @@ func _on_player_cooldown_timeout() -> void:
 func _on_monster_cooldown_timeout() -> void:
 	_player_health -= _monster.attack_damage
 	if _player_health <= 0:
-		pass
+		_on_player_defeated()
+		_respawn_timer.start()
 
 	update_player_health_label()
 
@@ -74,6 +74,10 @@ func _on_pimp_button_pressed() -> void:
 	emit_signal("tab_change_requested", TYPE.STATS)
 
 func _on_respawn_timer_timeout() -> void:
+	# Here we have to figure out if the player is still alive :D
+	if (_player_health <= 0):
+		_spawn_player()
+
 	_spawn_monster()
 
 func _on_player_max_health_changed(player_max_health : int) -> void:
@@ -85,6 +89,11 @@ func _on_player_max_health_changed(player_max_health : int) -> void:
 	update_player_health_label()
 
 func _spawn_player() -> void:
+	var epithet : String = EPITHETS[randi() % EPITHETS.size()]
+	epithet = epithet.capitalize()
+
+	_player_name_label.text = PLAYER_NAME.format([epithet])
+
 	var max_health : int = saved_game.get_player_max_health()
 	_player_health = max_health
 	update_player_health_label()
@@ -105,10 +114,25 @@ func _spawn_monster() -> void:
 	_player_cooldown_timer.start()
 	_monster_cooldown_timer.start()
 
-func _despawn_monster():
+func _on_monster_defeated():
 	_monster_sprite.visible = false
 	_player_cooldown_timer.stop()
 	_monster_cooldown_timer.stop()
+
+	_kill_count_label.kill_count += 1
+	if (_kill_count_label.kill_count >= 10):
+		# You have now reached the next floor! :D
+		saved_game.floor_index += 1
+		_kill_count_label.kill_count = 0
+
+func _on_player_defeated():
+	_player_sprite.visible = false
+	# Also disable the hobo monster!
+	_monster_sprite.visible = false
+	_player_cooldown_timer.stop()
+	_monster_cooldown_timer.stop()
+
+	_kill_count_label.kill_count = 0
 
 func update_monster_health_label() -> void:
 	var max_health : int = _monster.health_points
